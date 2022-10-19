@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.urls import path
 
-from Blog.views import mostrar_inicio, mostrar_autor, mostrar_pais, mostrar_transporte, procesar_formulario2, busqueda, buscar
+from Blog.views import mostrar_inicio, mostrar_autor, mostrar_pais, mostrar_transporte, procesar_formulario2, busqueda,busqueda_2 ,buscar, buscar_2
 
 urlpatterns = [
     path('inicio/', mostrar_inicio, name = "inicio"),
@@ -24,6 +24,9 @@ urlpatterns = [
     path("transporte/", mostrar_transporte, name = "transporte"),
     path("formulario-2/", procesar_formulario2, name="formulario-2"),
     path("busqueda/", busqueda, name="busqueda"),
+    path("busqueda-2/", busqueda_2, name="busqueda-2"),
     path("buscar/", buscar),
+    path("buscar-2/", buscar_2),
+
 
 ]

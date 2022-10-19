@@ -41,6 +41,21 @@ def procesar_formulario2(request):
 def busqueda(request):
     return render(request, "Blog/busqueda.html")
 
+def busqueda_2(request):
+    return render(request, "Blog/busqueda_2.html")
+
 def buscar(request):
     respuesta = f"Buscando el Pais : {request.GET['pais']}"
     return HttpResponse(respuesta)  # TODO: podríamos mostrarla, no?
+
+def buscar_2(request):
+
+    if not request.GET["pais"]:
+        return HttpResponse("No enviaste datos")
+    else:
+        pais_a_buscar = request.GET["pais"]
+        pais = Pais.objects.filter(pais=pais_a_buscar)
+
+        contexto = {"pais": pais_a_buscar, "pais_encontrados": pais}
+
+        return render(request, "Blog/resultado_busqueda.html", contexto)

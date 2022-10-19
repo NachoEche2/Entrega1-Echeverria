@@ -1,0 +1,12 @@
+
+<p>Estamos buscando el pais: {{ pais }}</p>
+
+{% if pais_encontrados %}
+
+<ul>
+{% for pais in pais_encontrados %}
+    <li>{{pais.nombre}} (camada {{pais.camada}})</li>
+{% endfor %}
+</ul>
+
+{% endif %}
