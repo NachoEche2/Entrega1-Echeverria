@@ -15,11 +15,15 @@ Including another URLconf
 """
 from django.urls import path
 
-from Blog.views import mostrar_inicio, mostrar_autor, mostrar_pais, mostrar_transporte
+from Blog.views import mostrar_inicio, mostrar_autor, mostrar_pais, mostrar_transporte, procesar_formulario2, busqueda, buscar
 
 urlpatterns = [
     path('inicio/', mostrar_inicio, name = "inicio"),
     path("autor/", mostrar_autor, name = "autor"),
     path("pais/", mostrar_pais, name = "pais"),
     path("transporte/", mostrar_transporte, name = "transporte"),
+    path("formulario-2/", procesar_formulario2, name="formulario-2"),
+    path("busqueda/", busqueda, name="busqueda"),
+    path("buscar/", buscar),
+
 ]

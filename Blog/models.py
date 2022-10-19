@@ -22,7 +22,7 @@ class Pais(models.Model):
 
     nombre = models.CharField(max_length=250)
     habitantes = models.IntegerField()
-    fechaindependencia = models.DateField()
+    fechaSalida = models.DateField()
 
     def __str__(self):
         return self.nombre
