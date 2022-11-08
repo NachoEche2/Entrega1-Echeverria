@@ -15,18 +15,42 @@ Including another URLconf
 """
 from django.urls import path
 
-from Blog.views import mostrar_inicio, mostrar_autor, mostrar_pais, mostrar_transporte, procesar_formulario2, busqueda,busqueda_2 ,buscar, buscar_2
+from Blog.views import (
+    inicio, 
+    autor, 
+    pais, 
+    transporte, 
+    procesar_formulario2, 
+    busqueda,
+    busqueda_2 ,
+    buscar, 
+    buscar_2,
+    entregables,
+    PaisList,
+    PaisDetalle,
+    PaisCreacion,
+    PaisUpdateView,
+    PaisDelete,   
+    busqueda_de_pais,
+)
 
 urlpatterns = [
-    path('inicio/', mostrar_inicio, name = "inicio"),
-    path("autor/", mostrar_autor, name = "autor"),
-    path("pais/", mostrar_pais, name = "pais"),
-    path("transporte/", mostrar_transporte, name = "transporte"),
+    path('inicio/', inicio, name = "inicio"),
+    path("autor/", autor, name = "autor"),
+    path("pais/", pais, name = "pais"),
+    path("transporte/", transporte, name = "transporte"),
     path("formulario-2/", procesar_formulario2, name="formulario-2"),
     path("busqueda/", busqueda, name="busqueda"),
     path("busqueda-2/", busqueda_2, name="busqueda-2"),
     path("buscar/", buscar),
     path("buscar-2/", buscar_2),
-
+    path("entregables/", entregables, name="entregables"),
+    path("pais/list", PaisList.as_view(), name="paislist"),
+    path("r'(?P<pk>\d+)^$'", PaisDetalle.as_view(), name="PaisDetail"),
+    path("pais-nuevo/", PaisCreacion.as_view(), name="PaisNew"),
+    path("editar/<pk>", PaisUpdateView.as_view(), name="PaisUpdate"),
+    path("borrar/<pk>", PaisDelete.as_view(), name="PaisDelete"),
+    path("busqueda-de-pais/", busqueda_de_pais, name="busqueda"),
 
 ]
+

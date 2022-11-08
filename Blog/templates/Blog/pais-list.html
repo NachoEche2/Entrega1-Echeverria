@@ -1,0 +1,25 @@
+
+<h1>Paises de Europa </h1>
+
+NO HAY PAISES
+
+
+{% if object_list %}
+
+    <ul>
+        {% for pais in object_list %}
+
+        <li>
+            <p>Nombre: {{ pais.nombre }}</p>
+            <p>
+                <a href="{% url 'PaisDetail' pais.id %}">Ver Paises</a>
+                <a href="{% url 'PaisUpdate' pais.id %}">Editar</a>
+                <a href="{% url 'PaisDelete' pais.id %}">Borrar</a>
+            </p>
+
+        </li>
+        {% endfor %}
+    </ul>
+{% else %}
+NO HAY PAISES
+{% endif %}
