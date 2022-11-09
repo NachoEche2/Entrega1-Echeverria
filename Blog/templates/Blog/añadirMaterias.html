@@ -1,11 +1,11 @@
 {% extends 'Blog/madre.html' %}
 
 {% block head %}
-    <title>Agregar Avatares</title>
+    <title>Agregar Materias Aprobadas</title>
 {% endblock head %}
 
 {% block body %}
-    <h1>En esta sección puedes agregar Avatares.</h1>
+    <h1>En esta sección puedes agregar Materias aprobadas.</h1>
 
 {% endblock body %}
 
@@ -15,11 +15,11 @@
 
     <table>
 
-        {{formulario.as_p}}
+        {{form.as_table}}
 
     </table>
 
-    <input type="submit" value="Submit">
+    <input type="submit" value="Enviar">
 
 
 </form>

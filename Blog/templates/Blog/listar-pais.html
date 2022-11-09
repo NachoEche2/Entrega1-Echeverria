@@ -1,7 +1,41 @@
+
 {% extends "Blog/madre.html" %}
 {% block inserte_aqui_su_contenido %}
+{% for pais in pais %}
+    {{ pais.nombre }}  (ciudad_visitada : {{ pais.ciudad_visitada  }} ) (satisfaccion  : {{ pais.satisfaccion   }} )
+<br>
+{% endfor %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+{% extends 'Blog/madre.html' %}
+
+{% block head %}
+    <title>Paises encontrados</title>
+{% endblock head %}
+
+{% block body %}
+    <p><h1>En esta sección podes ver los paises comentados en el blog.</h1>
+        <img src="https://www.geoenciclopedia.com/wp-content/uploads/2018/10/banderas-paises.jpg" width="600" wide="600">
+
+
+    </p>
+
+{% endblock body %}
+
 {% for pais in pais_encontrados %}
     {{ pais.nombre }}  (ciudad_visitada : {{ pais.ciudad_visitada  }} ) (satisfaccion  : {{ pais.satisfaccion   }} )
     <br>
+
 {% endfor %}
 {% endblock %}
+

@@ -2,6 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from Blog.models import Pais, Transporte, Autor, Avatar
 from Blog.forms import PaisFormulario
+from django.contrib.auth.models import User
 
 # Create your views here.
 from django.contrib.auth.decorators import login_required
@@ -88,6 +89,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 class PaisList(LoginRequiredMixin, ListView):
+    
     model = Pais
     template_name = "Blog/pais-list.html"
 
@@ -189,11 +191,40 @@ from Blog.forms import AvatarForm, UserEditionForm
 @login_required
 def editar_perfil(request):
     user = request.user
-    avatar = Avatar.objects.filter(user=request.user).first()
-    if request.method != "POST":
-        form = UserEditionForm(initial={"email": user.email})
+    if request.method == "POST":    #al presionar el botón
+
+        form = UserEditionForm(request.POST) #el formulario es el del usuario
+
+        if form.is_valid():
+
+            data = form.cleaned_data     #info en modo diccionario
+
+            data = form.cleaned_data
+            user.email = data["email"]
+            user.first_name = data["first_name"]
+            user.last_name = data["last_name"]
+            user.set_password(data["password1"])
+            user.save()
+
+
+            return render(request, "Blog/inicio.html")
+
     else:
-        form = UserEditionForm(request.POST)
+
+        form= UserEditionForm(initial={'username':user.username, 'email':user.email})
+
+    return render(request, "Blog/editarPerfil.html",{'form':form, 'usuario':user.username})
+
+
+@login_required
+def agregar_avatar(request):
+    user = request.user
+    avatar = Avatar.objects.filter(user=request.user).first()
+
+    if request.method != "POST":
+        form = AvatarForm(initial={"email": user.email})
+    else:
+        form = AvatarForm(request.POST)
         if form.is_valid():
             data = form.cleaned_data
             user.email = data["email"]
@@ -201,28 +232,8 @@ def editar_perfil(request):
             user.last_name = data["last_name"]
             user.set_password(data["password1"])
             user.save()
-            return render(
-                request, "Blog/inicio.html", {"avatar": avatar.imagen.url}
-            )
+            return render(request, "AppCoder24/inicio.html", {"avatar": avatar.imagen.url})
+        
 
-    contexto = {
-        "user": user, 
-        "form": form, 
-        "avatar": avatar.imagen.url
-    }
-    return render(request, "Blog/editarPerfil.html", contexto)
-
-
-@login_required
-def agregar_avatar(request):
-    if request.method != "POST":
-        form = AvatarForm()
-    else:
-        form = AvatarForm(request.POST, request.FILES)
-        if form.is_valid():
-            Avatar.objects.filter(user=request.user).delete()
-            form.save()
-            return render(request, "Blog/inicio.html")
-
-    contexto = {"form": form}
-    return render(request, "Blog/avatar_form.html", contexto)
+        
+    return render(request, "Blog/avatar_form.html",  {'form':form})

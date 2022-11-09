@@ -66,7 +66,7 @@ urlpatterns = [
     path("pais/<pk>'", PaisDetalle.as_view(), name="PaisDetail"),
     path("editar-perfil/", editar_perfil, name="EditarPerfil"),
     path("agregar-avatar/", agregar_avatar, name="AgregarAvatar"),
-    path("cursos-lista/", listar_pais),
+    path("Listar-lista/", listar_pais),
 ]
 
 

@@ -1,9 +1,15 @@
 {% extends "Blog/madre.html" %}
-{% block inserte_aqui_su_contenido %}
-<form action="" method="POST">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <br><br>
-    <button type="submit" name="submit">registrarse</button>
+
+{% load static %}
+
+
+{% block body %}
+
+<form action="" method="POST">{% csrf_token %}
+
+    {{form.as_p}}
+
+    <button type="submit">Registrate</button>
+
 </form>
-{% endblock %}
+{% endblock body %}
