@@ -1,5 +1,11 @@
-<h3>Pais</h3>  
+{% extends "Blog/madre.html" %}
+
+{% block inserte_aqui_su_contenido %}
+<h3>Detalle del Pais</h3>
 <p>Nombre del Pais: <strong>{{ pais.nombre }}</strong> </p>
 <p>satisfaccion: <i> {{ pais.satisfaccion }}</i></p>
 <p>ciudad visitada: <i> {{ pais.ciudad_visitada }}</i></p>
+{% endblock %}
+
+
 

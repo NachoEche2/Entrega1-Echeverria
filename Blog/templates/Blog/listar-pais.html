@@ -1,0 +1,7 @@
+{% extends "Blog/madre.html" %}
+{% block inserte_aqui_su_contenido %}
+{% for pais in pais_encontrados %}
+    {{ pais.nombre }}  (ciudad_visitada : {{ pais.ciudad_visitada  }} ) (satisfaccion  : {{ pais.satisfaccion   }} )
+    <br>
+{% endfor %}
+{% endblock %}

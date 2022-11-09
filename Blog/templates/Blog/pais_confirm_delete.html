@@ -1,21 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Pais Borrar</title>
-</head>
-<body style="background-color: yellowgreen;">
-
-    <form action="" method="POST">{% csrf_token %}
-        <table>
-            Estás seguro de que querés borrar el pais {{ object }}
-        </table>
-        <input type="submit" value="Submit">
-    </form>
-
-
-</body>
-</html>
+{% extends "Blog/madre.html" %}
+{% block inserte_aqui_su_contenido %}
+<form action="" method="POST">
+    {% csrf_token %}
+    Estás seguro de que querés borrar el Pais: <strong>{{ object }}</strong> ?
+    <br><br>
+    <input type="submit" value="Submit">
+</form>
+{% endblock %}

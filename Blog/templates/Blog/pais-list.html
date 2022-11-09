@@ -1,9 +1,8 @@
-
-<h1>Paises de Europa </h1>
-
-NO HAY PAISES
+{% extends "Blog/madre.html" %}
+{% block inserte_aqui_su_contenido %}
 
 
+<h1>Cursos de Coder - Python </h1>
 {% if object_list %}
 
     <ul>
@@ -12,7 +11,7 @@ NO HAY PAISES
         <li>
             <p>Nombre: {{ pais.nombre }}</p>
             <p>
-                <a href="{% url 'PaisDetail' pais.id %}">Ver Paises</a>
+                <a href="{% url 'PaisDetail' pais.id %}">Ver pais</a>
                 <a href="{% url 'PaisUpdate' pais.id %}">Editar</a>
                 <a href="{% url 'PaisDelete' pais.id %}">Borrar</a>
             </p>
@@ -21,5 +20,16 @@ NO HAY PAISES
         {% endfor %}
     </ul>
 {% else %}
-NO HAY PAISES
+<h3>No hay pais aún!</h3>
 {% endif %}
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
