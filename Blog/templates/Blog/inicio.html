@@ -14,20 +14,24 @@
 
 {% endblock body %}
 
-{% block Pais %}
+{% block pais %}
 <div class="col-lg-4">
     <!-- Search widget-->
     <div class="card mb-4">
-        <form action="Blog/resultado_busqueda.html" method="GET">
+        <form action="/Blog/buscarpais/" method="GET">
             <div class="card-header">Buscar Opiniones de Paises</div>
             <div class="card-body">
                 <div class="input-group">
                     <input class="form-control" type="text" placeholder="Ingresa la Pais..." name="pais" id="pais" />
                     <input type="submit" value="Buscar">
-                </div>               
-            </div>         
-        </form>               
+                </div>    
+        
+            </div>    
+                   
+        </form>  
+        
     </div>
+    
 </div>
 
 {% endblock %}

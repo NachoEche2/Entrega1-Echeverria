@@ -1,27 +1,29 @@
 {% extends 'Blog/madre.html' %}
 
-{% block head %}
-    <title>Agregar Avatares</title>
-{% endblock head %}
 
-{% block body %}
-    <h1>En esta sección puedes agregar Avatares.</h1>
+        {% block head %}
+        <title>Agregar Avatares</title>
+        {% endblock%}
 
-{% endblock body %}
+        {% block body %}
+        <h1>En esta sección puedes agregar Avatares.</h1>
 
-{% block Pais %}
+        {% endblock%}
 
-<form action="" enctype="multipart/form-data" method="POST">  {% csrf_token %}
+        {% block pais %}
 
-    <table>
+        <form action="" method="POST" enctype="multipart/form-data">  {% csrf_token %}
 
-        {{formulario.as_p}}
+            <table>
 
-    </table>
+                {{form.as_p}}
 
-    <input type="submit" value="Submit">
+            </table>
+
+            <input type="submit" value="Submit">
 
 
-</form>
+        </form>
 
-{% endblock %}
+        {% endblock %}
+

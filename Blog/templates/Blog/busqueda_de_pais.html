@@ -1,0 +1,27 @@
+{% extends 'Blog/madre.html' %}
+
+{% block head %}
+    <title>Añadir Pais</title>
+{% endblock head %}
+
+{% block body %}
+    <h1>En esta sección vas a poder agregar el Pais que desee.</h1>
+
+{% endblock body %}
+
+{% block pais %}
+
+<form action="" method="POST">  {% csrf_token %}
+
+    <table>
+
+        {{form.as_p}}
+
+    </table>
+
+    <input type="submit" value="Enviar">
+
+
+</form>
+
+{% endblock %}

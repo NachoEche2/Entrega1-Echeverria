@@ -1,7 +1,7 @@
 # ProyectoFinal
 Entrega intermedia del proyecto final
 
-Alumnos: Ignacio Echeverria y Iara Mander
+Alumnos: Ignacio Echeverria
 
 las rutas son
 Templates

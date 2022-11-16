@@ -1,0 +1,35 @@
+{% extends 'Blog/madre.html' %}
+
+{% block head %}
+    <title>Resultados búsqueda</title>
+{% endblock head %}
+
+{% block body %}
+    <h1>Has buscado el Pais de: {{busqueda}}</h1>
+
+{% endblock body %}
+
+{% block pais %}
+
+{% if resultados %}
+
+{% for r in resultados %}
+
+    <p>Opinion hecha por :{{pais.usuario}}</p>
+    <p>De la materia: {{pais.nombre}}, catedra {{pais.ciudad_visitada}} </p>
+    <p>Puntaje: {{pais.satisfaccion}}</p>
+    <p>Itinerario: {{pais.itinerario}}</p>
+
+    <p>********************************************************</p>
+
+{% endfor %}
+
+{% else %}
+
+<p>No hay Opiniones de dicho pais.</p>
+
+{% endif %}
+
+
+{% endblock %}
+

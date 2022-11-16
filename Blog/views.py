@@ -10,10 +10,11 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def inicio(request):
-    avatar = Avatar.objects.filter(user=request.user).first()
-    if avatar is not None:
+    try:
+        avatar = Avatar.objects.filter(user=request.user).first()
+        
         contexto = {"avatar": avatar.imagen.url}
-    else:
+    except:
         contexto = {}
     return render(request, "Blog/inicio.html", contexto)
 
@@ -21,46 +22,53 @@ def autor(request):
     return render(request, "Blog/autor.html")
 
 def pais(request):
-    return render(request, "Blog/pais.html")
+    
+    pais = Pais.objects.all()
+    return render(request, "Blog/pais_list.html",{"pais_encontrados":pais})
 
 def transporte(request):
     return render(request, "Blog/transporte.html")
 
-
+@login_required
 def procesar_formulario2(request):
     if request.method != "POST":
-        mi_formulario = PaisFormulario()
-    else:
-        mi_formulario = PaisFormulario(request.POST)
-        if mi_formulario.is_valid():
-            informacion = mi_formulario.cleaned_data
+        
+        form = PaisFormulario(request.POST)
+        if form.is_valid():
+            informacion = form.cleaned_data
             pais = Pais(
                 nombre=informacion["pais"],
                 satisfaccion=informacion["satisfaccion"],
                 ciudad_visitada=informacion["ciudad_visitada"],
+                itinerario=informacion["itinerario"],
+                año=informacion["año"],
+                foto=informacion["foto"],
             )
             pais.save()
             return render(request, "Blog/inicio.html")
+    else:
+        form = PaisFormulario()
 
-    contexto = {"formulario": mi_formulario}
+    contexto = {"form": form}
 
-    return render(request, "Blog/formulario-2.html", contexto)
+    return render(request, "Blog/busqueda_de_pais.html", contexto)
 
 
-def busqueda(request):
+#def busqueda(request):
     return render(request, "Blog/busqueda.html")
 
 
-def busqueda_2(request):
+#def busqueda_2(request):
     return render(request, "Blog/busqueda-2.html")
 
 
-def buscar(request):
+#def buscar(request):
     respuesta = f"Buscando el pais : {request.GET['pais']}"
     return HttpResponse(respuesta)
 
 
-def buscar_2(request):
+#@login_required
+#def buscar_2(request):
 
     if not request.GET["pais"]:
         return HttpResponse("No enviaste datos")
@@ -70,10 +78,10 @@ def buscar_2(request):
 
         contexto = {"pais": pais_a_buscar, "pais_encontrados": pais}
 
-        return render(request, "Blog/resultado_busqueda.html", contexto)
+        return render(request, "Blog/resultado_busqueda_nombre.html", contexto)
 
 
-def entregables(request):
+#def entregables(request):
     return render(request, "Blog/entregables.html")
 
 
@@ -91,7 +99,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin
 class PaisList(LoginRequiredMixin, ListView):
     
     model = Pais
-    template_name = "Blog/pais-list.html"
+    template_name = "Blog/pais_list.html"
 
 
 @login_required
@@ -119,7 +127,8 @@ from django.urls import reverse
 class PaisCreacion(LoginRequiredMixin, CreateView):
     model = Pais
     success_name = "/Blog/pais/list.html"
-    fields = ["nombre", "satisfaccion", "ciudad_visitada"]
+    fields = ["nombre", "satisfaccion", "ciudad_visitada","itinerario","año","foto"]
+    
 
     def get_success_url(self):
         return reverse("paislist")
@@ -128,7 +137,7 @@ class PaisCreacion(LoginRequiredMixin, CreateView):
 class PaisUpdateView(LoginRequiredMixin, UpdateView):
     model = Pais
     success_url = "/Blog/pais/list"
-    fields = ["nombre", "satisfaccion", "ciudad_visitada"]
+    fields = ["nombre", "satisfaccion", "ciudad_visitada", "itinerario","año","foto"]
 
 
 class PaisDelete(LoginRequiredMixin, DeleteView):
@@ -136,24 +145,24 @@ class PaisDelete(LoginRequiredMixin, DeleteView):
     success_url = "/Blog/pais/list"
 
 
-@login_required
-def busqueda_de_pais(request):
-    return render(request, "Blog/busqueda_de_pais.html")
+#@login_required
+#def busqueda_de_pais(request):
+    #return render(request, "Blog/busqueda_de_pais.html")
 
 
 @login_required
-def buscar_pais(request):
+def buscarpais(request):
     if not request.GET["nombre"]:
-        return HttpResponse("No enviaste datos")
+        return HttpResponse("No enviaste datos.")
     else:
-        nombre_a_buscar = request.GET["nombre"]
+        nombre_a_buscar=request.GET["nombre"]
         pais = Pais.objects.filter(nombre=nombre_a_buscar)
-
+        
         contexto = {"nombre": nombre_a_buscar, "pais_encontrados": pais}
-
-        return render(request, "Blog/resultado_busqueda_nombre.html", contexto)
-
-
+        
+        return render(request, "Blog/resultado_busqueda_nombre.html", contexto)   
+    
+    
 from django.contrib.auth import authenticate
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
@@ -222,18 +231,16 @@ def agregar_avatar(request):
     avatar = Avatar.objects.filter(user=request.user).first()
 
     if request.method != "POST":
-        form = AvatarForm(initial={"email": user.email})
+        form = AvatarForm()
     else:
-        form = AvatarForm(request.POST)
+        form = AvatarForm(request.POST, request.FILES)
         if form.is_valid():
-            data = form.cleaned_data
-            user.email = data["email"]
-            user.first_name = data["first_name"]
-            user.last_name = data["last_name"]
-            user.set_password(data["password1"])
-            user.save()
-            return render(request, "AppCoder24/inicio.html", {"avatar": avatar.imagen.url})
-        
-
-        
+            Avatar.objects.filter(user=request.user).delete()
+            form.save()
+            return render(request, "Blog/inicio.html")
     return render(request, "Blog/avatar_form.html",  {'form':form})
+
+
+def about(request):
+    return render(request, 'Blog/about.html')
+

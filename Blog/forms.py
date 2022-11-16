@@ -10,6 +10,9 @@ class PaisFormulario(forms.Form):
     pais = forms.CharField()
     satisfaccion = forms.IntegerField()
     ciudad_visitada = forms.CharField()
+    itinerario = forms.CharField(widget=forms.Textarea)
+    año=forms.IntegerField()
+
 
 
 class UserEditionForm(UserCreationForm):
@@ -30,4 +33,4 @@ class AvatarForm(forms.ModelForm):
 
     class Meta:
         model = Avatar
-        fields = ["imagen", "user"]
+        fields = ["user"]
