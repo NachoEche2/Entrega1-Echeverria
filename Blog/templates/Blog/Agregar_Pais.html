@@ -1,0 +1,36 @@
+{% extends "Blog/madre.html" %}
+
+{% block head %}
+    <title>Añadir Países</title>
+{% endblock head %}
+
+{% block body %}
+<h1>{{mensaje}}</h1>
+    <h1>En esta sección vas a poder agregar los paises con sus puntos de satisfacción e itinerarios</h1>
+    <p>Acá vas a poder cargar tus Destinos favoritos!
+
+        <center><img src="https://content.skyscnr.com/m/78c0adee87cafb12/original/eyeem-26694340-142112507.jpg?resize=1800px:1800px&quality=100" width="500" wide="500"></center>
+    </p>
+
+{% endblock body %}
+
+
+{% block pais %}
+
+<form action="" method="POST">  {% csrf_token %}
+
+    <table>
+
+        {{form.as_table}}
+
+    </table>
+
+    <input type="submit" value="Enviar">
+
+
+</form>
+
+{% endblock %}
+
+
+

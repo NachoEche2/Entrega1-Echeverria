@@ -128,6 +128,7 @@ class PaisCreacion(LoginRequiredMixin, CreateView):
     model = Pais
     success_name = "/Blog/pais/list.html"
     fields = ["nombre", "satisfaccion", "ciudad_visitada","itinerario","año","foto"]
+    template_name = "Blog/Agregar_Pais.html"
     
 
     def get_success_url(self):

@@ -1,20 +1,35 @@
 {% extends "Blog/madre.html" %}
+
+
+{% block head %}
+    <title>Mira los Paíse</title>
+{% endblock head %}
+
 {% block body %}
-    <p><h1>Acá podrás ver todos los países con sus puntos de satisfacción e itinerarios.</h1>
-        <img src="https://img.freepik.com/vector-premium/graduacion-parque-campus-grupo-estudiantes-felices-saltando-sobre-certificados-telon-fondo-edificio-universitario-manos-ninos-ninas-tunicas-estudiante-arrojan-gorras-concepto-aislado-dibujos-animados-vectoriales_176411-4154.jpg?w=2000" width="600" wide="600">
+<h1>{{mensaje}}</h1>
+    <h1>En podrás ver todos los países con sus puntos de satisfacción e itinerarios</h1>
+    <p>vas a poder cargar tus Destinos favoritos!
+
+        <center><img src="https://previews.123rf.com/images/kadirtinte/kadirtinte1403/kadirtinte140300004/27564296-banderas-oficiales-de-los-pa%C3%ADses.jpg" width="500" wide="500"></center>
+
     </p>
+
 
 {% if object_list %}
 
     <ul>
         {% for pais in object_list %}
 
+
+
         <li>
-            <p>Nombre: {{ pais.nombre }}</p>
+            <p><strong><font size=5>Nombre del Pais: {{ pais.nombre }}</font></strong></p>
             <p>
                 <a href="{% url 'PaisDetail' pais.id %}">Ver pais</a>
                 <a href="{% url 'PaisUpdate' pais.id %}">Editar</a>
                 <a href="{% url 'PaisDelete' pais.id %}">Borrar</a>
+                <p>
+                <img src="{{pais.foto.url}}" alt="No hay imagen."style="max-width: 350px;">
             </p>
 
         </li>
